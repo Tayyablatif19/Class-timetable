@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
+import Navbar from "../components/Navbar";
 import "./Leaderboard.css";
 
-export default function Leaderboard() {
+export default function Leaderboard({ selectedDate, setSelectedDate }) {
   const [usersXP, setUsersXP] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  // Fetch current user from Supabase auth
+  useEffect(() => {
+    async function fetchUser() {
+      const { data: { user: currentUser } = {}, error } = await supabase.auth.getUser();
+      if (!currentUser || error) return;
+      const { data: userData } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email", currentUser.email)
+        .single();
+      setUser(userData || null);
+    }
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     async function fetchLeaderboard() {
       setLoading(true);
 
-      // Current month
       const now = new Date();
       const currentMonth = now.getMonth() + 1;
       const currentYear = now.getFullYear();
@@ -19,7 +35,6 @@ export default function Leaderboard() {
       const nextMonthYear = currentMonth === 12 ? currentYear + 1 : currentYear;
       const monthEnd = `${nextMonthYear}-${String(nextMonth).padStart(2, "0")}-01`;
 
-      // Fetch all users
       const { data: users, error: usersError } = await supabase
         .from("users")
         .select("reg_id, name");
@@ -31,7 +46,6 @@ export default function Leaderboard() {
         return;
       }
 
-      // Fetch attendance for all users in current month
       const { data: attendance, error: attError } = await supabase
         .from("attendance")
         .select("reg_id, status")
@@ -45,19 +59,15 @@ export default function Leaderboard() {
         return;
       }
 
-      // Aggregate XP per user
       const xpMap = {};
-      users.forEach(user => {
-        xpMap[user.reg_id] = { reg_id: user.reg_id, name: user.name, xp: 0 };
-      });
+      users.forEach((u) => (xpMap[u.reg_id] = { reg_id: u.reg_id, name: u.name, xp: 0 }));
 
-      attendance.forEach(record => {
+      attendance.forEach((record) => {
         if (!xpMap[record.reg_id]) return;
         if (record.status === "present") xpMap[record.reg_id].xp += 10;
         else if (record.status === "absent") xpMap[record.reg_id].xp -= 5;
       });
 
-      // Convert to array and sort
       const sorted = Object.values(xpMap).sort((a, b) => b.xp - a.xp);
 
       setUsersXP(sorted);
@@ -69,7 +79,10 @@ export default function Leaderboard() {
 
   return (
     <div className="leaderboard-container">
-      
+      {user && (
+        <Navbar user={user} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      )}
+
       <h2 className="leaderboard-title">Leaderboard</h2>
       {loading ? (
         <p>Loading...</p>
@@ -85,7 +98,12 @@ export default function Leaderboard() {
           </thead>
           <tbody>
             {usersXP.map((user, idx) => (
-              <tr key={user.reg_id} className={idx === 0 ? "gold" : idx === 1 ? "silver" : idx === 2 ? "bronze" : ""}>
+              <tr
+                key={user.reg_id}
+                className={
+                  idx === 0 ? "gold" : idx === 1 ? "silver" : idx === 2 ? "bronze" : ""
+                }
+              >
                 <td>{idx + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.reg_id}</td>

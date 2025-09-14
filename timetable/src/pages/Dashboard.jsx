@@ -79,10 +79,10 @@ export default function Dashboard() {
       setAttendance(initialAttendance);
 
       // Fetch month attendance for XP
-      const monthStart = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-01`;
+      const monthStart = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2,'0')}-01`;
       const nextMonth = selectedDate.getMonth() === 11 ? 0 : selectedDate.getMonth() + 1;
       const nextMonthYear = selectedDate.getMonth() === 11 ? selectedDate.getFullYear() + 1 : selectedDate.getFullYear();
-      const monthEnd = `${nextMonthYear}-${String(nextMonth + 1).padStart(2, '0')}-01`;
+      const monthEnd = `${nextMonthYear}-${String(nextMonth+1).padStart(2,'0')}-01`;
 
       const { data: monthData } = await supabase
         .from("attendance")
@@ -154,11 +154,12 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
+      
       <Navbar user={user} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 
       <h1 className="dashboard-title">
-        Welcome, {user.name.charAt(0).toUpperCase() + user.name.slice(1)}.
-      </h1>
+  Welcome, {user.name.charAt(0).toUpperCase() + user.name.slice(1)}.
+</h1>
 
       <p className="dashboard-subtitle">Classes for {selectedDate.toDateString()}</p>
 

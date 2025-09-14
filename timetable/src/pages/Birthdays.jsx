@@ -1,55 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
+import Navbar from "../components/Navbar";
 import "./Birthdays.css";
 
-export default function Birthdays() {
+export default function Birthdays({ selectedDate, setSelectedDate }) {
   const [birthdays, setBirthdays] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { data: { user: currentUser } = {}, error } = await supabase.auth.getUser();
+      if (!currentUser || error) return;
+      const { data: userData } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email", currentUser.email)
+        .single();
+      setUser(userData || null);
+    }
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     async function fetchBirthdays() {
       setLoading(true);
+      const { data, error } = await supabase.from("users").select("name, dob");
 
-      // Fetch all users
-      const { data, error } = await supabase
-        .from("users")
-        .select("name, dob");
-
-      if (error) {
-        console.error("Error fetching users:", error);
+      if (error || !data) {
+        console.error(error);
         setBirthdays([]);
-      } else {
-        const now = new Date();
-        const currentMonth = now.getMonth() + 1; // 1-based
-
-        // Filter users with birthday in current month and calculate days left
-        const monthBirthdays = data
-          .filter(user => user.dob)
-          .map(user => {
-            const dobDate = new Date(user.dob);
-            if (dobDate.getMonth() + 1 === currentMonth) {
-              const birthdayThisYear = new Date(
-                now.getFullYear(),
-                dobDate.getMonth(),
-                dobDate.getDate()
-              );
-              const timeDiff = birthdayThisYear - now;
-              const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-              return {
-                name: user.name,
-                day: dobDate.getDate(),
-                month: dobDate.getMonth() + 1,
-                daysLeft: daysLeft >= 0 ? daysLeft : 0
-              };
-            }
-            return null;
-          })
-          .filter(Boolean)
-          .sort((a, b) => a.daysLeft - b.daysLeft);
-
-        setBirthdays(monthBirthdays);
+        setLoading(false);
+        return;
       }
 
+      const now = new Date();
+      const currentMonth = now.getMonth() + 1;
+
+      const monthBirthdays = data
+        .filter((u) => u.dob)
+        .map((u) => {
+          const dobDate = new Date(u.dob);
+          if (dobDate.getMonth() + 1 === currentMonth) {
+            const birthdayThisYear = new Date(
+              now.getFullYear(),
+              dobDate.getMonth(),
+              dobDate.getDate()
+            );
+            const timeDiff = birthdayThisYear - now;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            return {
+              name: u.name,
+              day: dobDate.getDate(),
+              month: dobDate.getMonth() + 1,
+              daysLeft: daysLeft >= 0 ? daysLeft : 0,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.daysLeft - b.daysLeft);
+
+      setBirthdays(monthBirthdays);
       setLoading(false);
     }
 
@@ -58,6 +70,10 @@ export default function Birthdays() {
 
   return (
     <div className="birthdays-container">
+      {user && (
+        <Navbar user={user} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      )}
+
       <h2 className="birthdays-title">Birthdays This Month</h2>
       {loading ? (
         <p>Loading...</p>

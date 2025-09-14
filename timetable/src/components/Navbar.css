@@ -40,13 +40,6 @@
   color: #4b5563;
 }
 
-/* Hide date on mobile */
-@media (max-width: 640px) {
-  .navbar-date {
-    display: none;
-  }
-}
-
 /* User name */
 .navbar-user {
   font-weight: 500;
@@ -70,7 +63,7 @@
   transform: scale(1.05);
 }
 
-/* Leaderboard & Birthday buttons (matching style) */
+/* Leaderboard, Birthday, Calendar buttons */
 .leaderboard-btn, .birthday-btn, .calendar-btn {
   background-color: #2563eb;
   color: white;
@@ -91,7 +84,7 @@
 /* Calendar popup */
 .react-datepicker {
   position: absolute;
-  top: 50px; /* below the navbar buttons */
+  top: 50px; /* below navbar buttons */
   left: 0;
   z-index: 100;
   border-radius: 12px;
@@ -101,7 +94,7 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Header of date picker (month + navigation) */
+/* Header of date picker */
 .react-datepicker__header {
   background-color: #2563eb;
   color: white;
@@ -143,4 +136,13 @@
 .react-datepicker__day--disabled {
   color: #9ca3af;
   cursor: not-allowed;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 640px) {
+  .navbar-date,
+  .navbar-user {
+    display: none; /* Hide only date & username */
+  }
+  /* Buttons remain visible */
 }

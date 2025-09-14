@@ -1,0 +1,85 @@
+.class-card {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .class-card {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.class-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.class-subject {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.class-code,
+.class-time,
+.class-room,
+.class-instructor {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+.class-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.attend-btn,
+.absent-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.attend-btn {
+  background-color: #22c55e;
+}
+
+.attend-btn:hover {
+  background-color: #16a34a;
+}
+
+.attend-btn.active,
+.attend-btn:disabled {
+  background-color: #15803d;
+  box-shadow: 0 0 0 2px #22c55e33;
+  opacity: 1;
+}
+
+.absent-btn {
+  background-color: #ef4444;
+}
+
+.absent-btn:hover {
+  background-color: #dc2626;
+}
+
+.absent-btn.active,
+.absent-btn:disabled {
+  background-color: #991b1b;
+  box-shadow: 0 0 0 2px #ef444433;
+  opacity: 1;
+}

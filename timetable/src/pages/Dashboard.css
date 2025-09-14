@@ -1,0 +1,111 @@
+/* Dashboard container */
+.dashboard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Inter", sans-serif;
+  color: #1f2937; /* dark gray for text */
+}
+
+/* Titles */
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.dashboard-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #4b5563; /* medium gray */
+}
+
+/* XP Bar */
+.xp-bar-container {
+  background-color: #e5e7eb; /* light gray background */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  height: 28px;
+}
+
+.xp-bar-fill {
+  background-color: #056b00; /* blue filler */
+  color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Class Card spacing */
+.class-card {
+  margin-bottom: 12px;
+}
+
+/* Loading */
+.dashboard-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  color: #4b5563;
+}
+
+/* Calendar container */
+.calendar-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Calendar icon */
+.calendar-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+/* DatePicker overrides for aesthetics */
+.react-datepicker {
+  border: 1px solid #d1d5db; /* gray border */
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.react-datepicker__header {
+  background-color: #f9fafb; /* very light gray */
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.react-datepicker__current-month {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #2563eb !important; /* blue highlight */
+  color: white;
+  border-radius: 50%;
+}
+
+.react-datepicker__day--disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.react-datepicker__day:hover:not(.react-datepicker__day--disabled) {
+  background-color: #dbeafe; /* light blue hover */
+  border-radius: 50%;
+}
+
+/* No classes message */
+.no-classes {
+  text-align: center;
+  margin-top: 20px;
+  color: #6b7280;
+  font-size: 1rem;
+}

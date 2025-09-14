@@ -1,0 +1,146 @@
+/* Navbar container */
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left section (buttons + title) */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Navbar title */
+.navbar-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Right section (date + user + logout) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Navbar date */
+.navbar-date {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Hide date on mobile */
+@media (max-width: 640px) {
+  .navbar-date {
+    display: none;
+  }
+}
+
+/* User name */
+.navbar-user {
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Logout button */
+.logout-btn {
+  background-color: #ef4444;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.logout-btn:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Leaderboard & Birthday buttons (matching style) */
+.leaderboard-btn, .birthday-btn, .calendar-btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+.leaderboard-btn:hover, .birthday-btn:hover, .calendar-btn:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Calendar popup */
+.react-datepicker {
+  position: absolute;
+  top: 50px; /* below the navbar buttons */
+  left: 0;
+  z-index: 100;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  background-color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header of date picker (month + navigation) */
+.react-datepicker__header {
+  background-color: #2563eb;
+  color: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Day names */
+.react-datepicker__day-name {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* Individual days */
+.react-datepicker__day {
+  border-radius: 6px;
+  line-height: 2rem;
+  margin: 2px;
+  transition: background 0.2s, color 0.2s;
+}
+.react-datepicker__day:hover {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+/* Selected day */
+.react-datepicker__day--selected {
+  background-color: #2563eb;
+  color: white;
+}
+
+/* Today highlight */
+.react-datepicker__day--today {
+  font-weight: bold;
+  color: #1d4ed8;
+}
+
+/* Disable future days */
+.react-datepicker__day--disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}

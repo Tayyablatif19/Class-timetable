@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import Navbar from "../components/Navbar";
 import "./Birthdays.css";
+import Skeleton from "../components/Skeleton";
 
 export default function Birthdays({ selectedDate, setSelectedDate }) {
   const [birthdays, setBirthdays] = useState([]);
@@ -75,8 +76,14 @@ export default function Birthdays({ selectedDate, setSelectedDate }) {
       )}
 
       <h2 className="birthdays-title">Birthdays This Month</h2>
+
       {loading ? (
-        <p>Loading...</p>
+        <div className="birthdays-container">
+          <Skeleton height="32px" width="50%" style={{ marginBottom: "20px" }} />
+          {[...Array(4)].map((_, idx) => (
+            <Skeleton key={idx} height="24px" width="100%" style={{ marginBottom: "12px" }} />
+          ))}
+        </div>
       ) : birthdays.length === 0 ? (
         <div className="no-birthdays-card">No birthdays this month 🎉</div>
       ) : (

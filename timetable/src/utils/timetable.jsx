@@ -18,8 +18,9 @@ export const timetable = {
   ],
 
   Friday: [
-    { id: "fri-1", time: "09:00–11:00", subject: "Ideology & Constitution of Pakistan", code: "HU-127", instructor: "Dr Saeed ", room: "CR-5" },
-    { id: "fri-2", time: "11:40–13:00", subject: "Fundamentals of Business Mathematics", code: "MATH-114", instructor: "Dr Hasnain Ali Naqvi", room: "CR-6" },
+    { id: "fri-1", time: "09:00–10:00", subject: "Ideology & Constitution of Pakistan", code: "HU-127", instructor: "Dr Saeed ", room: "CR-5" },
+    { id: "fri-2", time: "10:00–11:00", subject: "Ideology & Constitution of Pakistan", code: "HU-127", instructor: "Dr Saeed ", room: "CR-5" },
+    { id: "fri-3", time: "11:40–13:00", subject: "Fundamentals of Business Mathematics", code: "MATH-114", instructor: "Dr Hasnain Ali Naqvi", room: "CR-6" },
   ],
   
 };

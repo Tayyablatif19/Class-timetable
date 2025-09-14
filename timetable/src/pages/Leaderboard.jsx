@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import Navbar from "../components/Navbar";
 import "./Leaderboard.css";
+import Skeleton from "../components/Skeleton";
 
 export default function Leaderboard({ selectedDate, setSelectedDate }) {
   const [usersXP, setUsersXP] = useState([]);
@@ -85,8 +86,15 @@ export default function Leaderboard({ selectedDate, setSelectedDate }) {
 
       <h2 className="leaderboard-title">Leaderboard</h2>
       {loading ? (
-        <p>Loading...</p>
+        <div className="leaderboard-container">
+          <Skeleton height="32px" width="40%" style={{ marginBottom: "20px" }} />
+          {[...Array(5)].map((_, idx) => (
+            <Skeleton key={idx} height="24px" width="100%" style={{ marginBottom: "12px" }} />
+          ))}
+        </div>
       ) : (
+
+
         <table className="leaderboard-table">
           <thead>
             <tr>

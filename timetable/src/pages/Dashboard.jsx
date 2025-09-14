@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import XPBar from "../components/XPBar";
 import ClassCard from "../components/ClassCard";
 import "./Dashboard.css";
+import Skeleton from "../components/Skeleton";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -150,7 +151,16 @@ export default function Dashboard() {
     });
   };
 
-  if (!user || loading) return <p className="dashboard-loading">Loading...</p>;
+  if (!user || loading)
+  return (
+    <div className="dashboard-container">
+      <Skeleton height="32px" width="50%" style={{ marginBottom: "16px" }} />
+      <Skeleton height="24px" width="30%" style={{ marginBottom: "16px" }} />
+      <Skeleton height="28px" width="100%" style={{ marginBottom: "12px" }} />
+      <Skeleton height="28px" width="100%" style={{ marginBottom: "12px" }} />
+      <Skeleton height="28px" width="100%" style={{ marginBottom: "12px" }} />
+    </div>
+  );
 
   return (
     <div className="dashboard-container">

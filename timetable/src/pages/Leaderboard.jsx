@@ -124,3 +124,5 @@ export default function Leaderboard({ selectedDate, setSelectedDate }) {
     </div>
   );
 }
+
+

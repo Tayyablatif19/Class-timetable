@@ -72,12 +72,12 @@
   margin-top: 4px;
 }
 
-/* Locked badges: subtle opacity only */
+
 .badge-card.locked {
   opacity: 0.6;
 }
 
-/* Unlocked badges: full opacity */
+
 .badge-card.unlocked {
   opacity: 1;
   animation: unlockBadge 0.6s ease forwards;

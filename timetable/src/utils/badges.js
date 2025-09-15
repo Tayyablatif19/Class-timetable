@@ -55,3 +55,5 @@ export async function checkAndAwardXPBadges(userId, currentXP) {
 
   return newlyAwarded;
 }
+
+

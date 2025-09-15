@@ -100,3 +100,4 @@ export default function Navbar({ user, selectedDate, setSelectedDate }) {
     </nav>
   );
 }
+

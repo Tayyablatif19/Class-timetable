@@ -19,3 +19,5 @@ export default function XPBar({ currentXP, totalXP }) {
     </div>
   );
 }
+
+

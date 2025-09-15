@@ -95,7 +95,7 @@ export default function Badges() {
   return (
     <div className="badges-page">
       <Navbar user={user} />
-      <h1 className="badges-title">Badges</h1>
+      <h1 className="badges-title">Badges - work in progress</h1>
 
       <div className="badges-grid">
         {loading

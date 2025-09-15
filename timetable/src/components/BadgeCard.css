@@ -1,0 +1,42 @@
+.badge-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  padding: 16px;
+  margin: 10px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.badge-icon {
+  font-size: 2rem;
+}
+
+.badge-info {
+  flex: 1;
+}
+
+.badge-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.badge-desc {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+.badge-date {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 4px;
+}

@@ -21,7 +21,6 @@ export default function Navbar({ user, selectedDate, setSelectedDate }) {
   });
 
   const path = location.pathname;
-
   const showCalendar = path === "/dashboard";
 
   let firstButtonLabel = "";
@@ -30,7 +29,7 @@ export default function Navbar({ user, selectedDate, setSelectedDate }) {
   if (path === "/dashboard") {
     firstButtonLabel = "🏆";
     firstButtonAction = () => navigate("/leaderboard", { state: { user } });
-  } else if (path === "/leaderboard" || path === "/birthdays") {
+  } else if (path === "/leaderboard" || path === "/birthdays" || path === "/badges") {
     firstButtonLabel = "Home";
     firstButtonAction = () => navigate("/dashboard");
   }
@@ -44,6 +43,9 @@ export default function Navbar({ user, selectedDate, setSelectedDate }) {
       ? () => navigate("/birthdays")
       : () => navigate("/leaderboard", { state: { user } });
 
+  // NEW: Badges button always visible
+  const goToBadges = () => navigate("/badges");
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -53,6 +55,11 @@ export default function Navbar({ user, selectedDate, setSelectedDate }) {
 
         <button className="nav-btn" onClick={secondButtonAction}>
           {secondButtonLabel}
+        </button>
+
+        {/* New Badges button */}
+        <button className="nav-btn" onClick={goToBadges}>
+          🏅
         </button>
 
         {showCalendar && (

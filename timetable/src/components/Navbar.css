@@ -63,8 +63,8 @@
   transform: scale(1.05);
 }
 
-/* Leaderboard, Birthday, Calendar buttons */
-.leaderboard-btn, .birthday-btn, .calendar-btn {
+/* Shared style for nav buttons (Leaderboard, Birthdays, Badges, Calendar) */
+.nav-btn, .calendar-btn {
   background-color: #2563eb;
   color: white;
   padding: 6px 14px;
@@ -76,7 +76,13 @@
   box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
   transition: background 0.2s, transform 0.2s;
 }
-.leaderboard-btn:hover, .birthday-btn:hover, .calendar-btn:hover {
+.nav-btn:hover, .calendar-btn:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Active state (highlights current page button) */
+.nav-btn.active {
   background-color: #1d4ed8;
   transform: scale(1.05);
 }
@@ -144,5 +150,5 @@
   .navbar-user {
     display: none; /* Hide only date & username */
   }
-  /* Buttons remain visible */
+  /* Buttons stay visible */
 }

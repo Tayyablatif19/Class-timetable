@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Leaderboard from "./pages/Leaderboard";
 import Birthdays from "./pages/Birthdays"; 
+import Badges from "./pages/Badges";
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/birthdays" element={<Birthdays />} />
+        <Route path="/badges" element={<Badges />} />
 
       </Routes>
     </BrowserRouter>

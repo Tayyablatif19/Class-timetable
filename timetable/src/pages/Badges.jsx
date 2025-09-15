@@ -11,15 +11,41 @@ export default function Badges() {
     async function fetchBadges() {
       setLoading(true);
       try {
-        const { data, error } = await supabase.from("badges").select("*");
-        if (error) {
-          console.error("Supabase error:", error);
-          setBadges([]);
-        } else {
-          setBadges(data || []);
+        // 1. Fetch badge definitions
+        const { data: defs, error: defsError } = await supabase
+          .from("badge_definitions")
+          .select("*")
+          .order("display_order");
+
+        if (defsError) throw defsError;
+
+        // 2. Get logged-in user
+        const { data: userData } = await supabase.auth.getUser();
+        const user = userData?.user;
+
+        // 3. Fetch unlocked badges (if user logged in)
+        let unlocked = [];
+        if (user) {
+          const { data: unlockedRows, error: ubError } = await supabase
+            .from("user_badges")
+            .select("*")
+            .eq("user_id", user.id);
+
+          if (ubError) throw ubError;
+          unlocked = unlockedRows;
         }
+
+        // 4. Merge unlocked info
+        const merged = defs.map((badge) => {
+          const match = unlocked.find(
+            (u) => u.badge_key === badge.key || u.badge_id === badge.id
+          );
+          return { ...badge, earned_at: match?.earned_at || null };
+        });
+
+        setBadges(merged);
       } catch (err) {
-        console.error("Unexpected error:", err);
+        console.error("Failed to fetch badges:", err);
         setBadges([]);
       } finally {
         setLoading(false);
@@ -35,8 +61,6 @@ export default function Badges() {
 
       {loading ? (
         <p className="loading-text">Loading badges...</p>
-      ) : badges.length === 0 ? (
-        <p className="no-badges">You have no badges yet. Start participating to earn some!</p>
       ) : (
         <div className="badges-grid">
           {badges.map((badge) => (
